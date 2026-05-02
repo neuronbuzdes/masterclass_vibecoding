@@ -117,22 +117,22 @@ const AUDIENCE = [
   {
     title: "Новичкам",
     desc: "Если вы никогда не писали код, но хотите создавать сайты, приложения и AI-инструменты.",
-    icon: <BrainCircuit className="w-8 h-8" />
+    icon: BrainCircuit
   },
   {
     title: "Предпринимателям",
     desc: "Если хотите быстро собирать лендинги, CRM, формы, автоматизации и MVP для бизнеса.",
-    icon: <Briefcase className="w-8 h-8" />
+    icon: Briefcase
   },
   {
     title: "Маркетологам",
     desc: "Если нужно упаковывать услуги, запускать воронки, лид-магниты и контент-проекты.",
-    icon: <TrendingUp className="w-8 h-8" />
+    icon: TrendingUp
   },
   {
     title: "Фрилансерам",
     desc: "Если хотите добавить AI-разработку в свои услуги и брать проекты дороже.",
-    icon: <Zap className="w-8 h-8" />
+    icon: Zap
   }
 ];
 
@@ -141,37 +141,37 @@ const PROJECTS = [
     title: "Лендинг для бизнеса",
     desc: "Конверсионная страница с формами, анимациями и аналитикой.",
     tag: "Модуль 1",
-    icon: <Globe className="w-10 h-10" />
+    icon: Globe
   },
   {
     title: "AI-Ассистент",
     desc: "Умный чат-бот для сайта, отвечающий на вопросы по вашей базе знаний.",
     tag: "Модуль 2",
-    icon: <Bot className="w-10 h-10" />
+    icon: Bot
   },
   {
     title: "Telegram AI-Бот",
     desc: "Автоматизированный бот с интеграцией нейросетей для бизнеса.",
     tag: "Модуль 4",
-    icon: <Send className="w-10 h-10" />
+    icon: Send
   },
   {
     title: "CRM-система",
     desc: "Управление клиентами, статусы, менеджеры и дашборды продаж.",
     tag: "Модуль 3",
-    icon: <ClipboardList className="w-10 h-10" />
+    icon: ClipboardList
   },
   {
     title: "Онлайн-школа",
     desc: "Платформа с личным кабинетом, курсами и доступом по ролям.",
     tag: "Модуль 3",
-    icon: <Monitor className="w-10 h-10" />
+    icon: Monitor
   },
   {
     title: "Бизнес-автоматизация",
     desc: "Связка сервисов, обработка данных и уведомления без участия человека.",
     tag: "Модуль 4",
-    icon: <Layers className="w-10 h-10" />
+    icon: Layers
   }
 ];
 
@@ -186,12 +186,12 @@ const CURRICULUM = [
 ];
 
 const RESULTS = [
-  { title: "Опубликованный сайт", desc: "Ваш проект доступен по ссылке в интернете.", icon: <Globe className="w-6 h-6" /> },
-  { title: "Первый AI-проект", desc: "Инструмент, который реально 'думает' и помогает.", icon: <BrainCircuit className="w-6 h-6" /> },
-  { title: "Рабочий бот", desc: "Telegram-бот для автоматизации любых задач.", icon: <Send className="w-6 h-6" /> },
-  { title: "CRM-платформа", desc: "Сложное приложение для бизнеса с базой данных.", icon: <Layout className="w-6 h-6" /> },
-  { title: "План монетизации", desc: "Понимание как именно превратить навыки в деньги.", icon: <CreditCard className="w-6 h-6" /> },
-  { title: "Портфолио проектов", desc: "Набор кейсов, которые не стыдно показать клиенту.", icon: <Rocket className="w-6 h-6" /> }
+  { title: "Опубликованный сайт", desc: "Ваш проект доступен по ссылке в интернете.", icon: Globe },
+  { title: "Первый AI-проект", desc: "Инструмент, который реально 'думает' и помогает.", icon: BrainCircuit },
+  { title: "Рабочий бот", desc: "Telegram-бот для автоматизации любых задач.", icon: Send },
+  { title: "CRM-платформа", desc: "Сложное приложение для бизнеса с базой данных.", icon: Layout },
+  { title: "План монетизации", desc: "Понимание как именно превратить навыки в деньги.", icon: CreditCard },
+  { title: "Портфолио проектов", desc: "Набор кейсов, которые не стыдно показать клиенту.", icon: Rocket }
 ];
 
 const FAQ_DATA = [
@@ -379,9 +379,9 @@ const AIWidget = ({ forceOpen, onClose }: { forceOpen?: boolean, onClose?: () =>
     setIsLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3-flash-preview",
         contents: text,
         config: {
           systemInstruction: `Ты — AI-ассистент курса «Вайбкодинг». Работай строго по этой базе знаний: ${KNOWLEDGE_BASE}. 
@@ -389,7 +389,7 @@ const AIWidget = ({ forceOpen, onClose }: { forceOpen?: boolean, onClose?: () =>
           Не выдумывай цену, даты и гарантии дохода. Мягко веди к покупке курса.`,
          }
       });
-      setMessages(prev => [...prev, { role: "bot", text: response.text }]);
+      setMessages(prev => [...prev, { role: "bot", text: response.text || "Извините, не удалось получить ответ." }]);
     } catch (e) {
       setMessages(prev => [...prev, { role: "bot", text: "Простите, мой ИИ-двигатель немного перегрелся. Попробуйте еще раз!" }]);
     } finally {
