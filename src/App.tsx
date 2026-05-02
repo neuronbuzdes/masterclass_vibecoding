@@ -238,6 +238,8 @@ const Navbar = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
     { label: "Для кого", href: "#audience" },
     { label: "Проекты", href: "#projects" },
     { label: "Программа", href: "#curriculum" },
+    { label: "Результаты", href: "#results" },
+    { label: "Монетизация", href: "#money" },
     { label: "FAQ", href: "#faq" }
   ];
 
@@ -526,6 +528,91 @@ const AIWidget = ({ forceOpen, onClose }: { forceOpen?: boolean, onClose?: () =>
 
 // --- Main Page Sections ---
 
+const WhyVibeCodingSection = () => {
+  const features = [
+    { title: "Скорость x10", desc: "То, на что у программиста уходит неделя, ты соберешь за один вечер с помощью ИИ.", icon: Zap },
+    { title: "AI как напарник", desc: "Тебе не нужно гуглить ошибки часами. Твой ИИ-ментор всегда подскажет верное решение.", icon: Sparkles },
+    { title: "Без зубрежки", desc: "Мы не учим синтаксис языков. Мы учим архитектуре, логике и правильным промптам.", icon: BrainCircuit },
+    { title: "Профессиональный стек", desc: "Ты используешь те же инструменты, что и топовые разработчики в Кремниевой долине.", icon: Layers },
+    { title: "Сообщество", desc: "Ты попадаешь в тусовку людей, которые создают продукты будущего прямо сейчас.", icon: Share2 },
+    { title: "Результат сразу", desc: "Твой первый рабочий сайт будет опубликован уже в первый день обучения.", icon: Rocket },
+  ];
+
+  return (
+    <section className="py-24 bg-slate-900/50 relative overflow-hidden">
+      <div className="container mx-auto px-6">
+        <SectionHeader 
+          badge="Преимущества"
+          title="Почему вайбкодинг — это <br/> чит-код для жизни?"
+          sub="Технология, которая меняет правила игры в IT и бизнесе"
+          center
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((f, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.05 }}
+              viewport={{ once: true }}
+              className="p-8 bg-slate-950 border border-white/5 rounded-[32px] hover:border-cyan-500/30 transition-all group"
+            >
+              <div className="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <f.icon className="w-7 h-7 text-cyan-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">{f.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed font-medium">{f.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const MonetizationSection = () => {
+  const models = [
+    { title: "Фриланс 2.0", desc: "Создавай сайты и ботов в 10 раз быстрее конкурентов и бери больше проектов.", icon: Briefcase, profit: "от $1,500/мес" },
+    { title: "AI-Агентство", desc: "Автоматизируй бизнес-процессы других компаний и получай оплату за результат.", icon: TrendingUp, profit: "от $3,000/мес" },
+    { title: "Свои микро-SAAS", desc: "Запускай собственные сервисы с подпиской — от AI-чатов до CRM.", icon: Rocket, profit: "Неограниченно" },
+  ];
+
+  return (
+    <section id="money" className="py-24 bg-slate-950 border-t border-white/5">
+      <div className="container mx-auto px-6">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeader 
+            badge="Заработок"
+            title="Как ты будешь <br/> монетизировать навыки?"
+            sub="Вайбкодинг — это не только про творчество, но и про твердые деньги в новой экономике"
+            center
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {models.map((m, i) => (
+              <motion.div 
+                key={i}
+                whileHover={{ y: -10 }}
+                className="p-8 bg-slate-900 border border-white/10 rounded-[40px] relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 p-6 opacity-5">
+                  <m.icon className="w-20 h-20 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">{m.title}</h3>
+                <p className="text-slate-400 text-sm mb-8 leading-relaxed font-medium">{m.desc}</p>
+                <div className="inline-block px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 font-black text-sm">
+                  {m.profit}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const Hero = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
   return (
     <section className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden">
@@ -543,7 +630,7 @@ const Hero = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Badge>AI-курс для тех, кто хочет создавать сайты и ботов без кода</Badge>
+            <Badge>AI-курс для тех, кто хочет создавать сайты, приложения и ботов без классического пути программиста</Badge>
             
             <h1 className="text-5xl md:text-7xl xl:text-8xl font-black text-white leading-[0.95] tracking-tighter mb-8">
               Научись создавать <br />
@@ -553,8 +640,8 @@ const Hero = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
               — даже если ты не программист
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-semibold mb-12 max-w-xl">
-              Пошаговый курс по вайбкодингу: от первого сайта и Telegram-бота до CRM, автоматизаций и первых денег на цифровых продуктах.
+            <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-semibold mb-12 max-w-xl italic">
+              Пошаговый курс по вайбкодингу: от первого сайта и Telegram-бота до CRM, мини-платформ, автоматизаций и первых денег на цифровых продуктах.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 items-center">
@@ -562,7 +649,10 @@ const Hero = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
                 Забронировать место
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="w-full sm:w-auto px-10 py-5 border-2 border-white/10 text-white font-bold text-lg rounded-2xl hover:bg-white/5 transition-all">
+              <button 
+                onClick={() => { document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' }); }}
+                className="w-full sm:w-auto px-10 py-5 border-2 border-white/10 text-white font-bold text-lg rounded-2xl hover:bg-white/5 transition-all"
+              >
                 Посмотреть программу
               </button>
             </div>
@@ -591,7 +681,7 @@ const Hero = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
                 </div>
                 <div>
                   <p className="text-xs font-black text-slate-500 uppercase tracking-widest">Проекты</p>
-                  <p className="text-xl font-black text-white">9+ в портфолио</p>
+                  <p className="text-xl font-black text-white">9+ полноценных кейсов</p>
                 </div>
               </div>
             </div>
@@ -1099,11 +1189,13 @@ export default function App() {
       <Hero onOpenAssistant={handleOpenAssistant} />
       
       <TrustMiniSection />
+      <WhyVibeCodingSection />
       <AudienceSection />
       <LearningFlowSection />
       <ProjectsSection />
       <CurriculumSection />
       <ResultsSection />
+      <MonetizationSection />
       <AIAssistantSection onOpenAssistant={handleOpenAssistant} />
       <FAQSection />
       <FinalCTASection onOpenAssistant={handleOpenAssistant} />
@@ -1115,11 +1207,11 @@ export default function App() {
       <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 z-[90] bg-slate-950/80 backdrop-blur-xl border-t border-white/10 flex gap-4">
         <button 
           onClick={handleOpenAssistant}
-          className="flex-1 px-4 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl text-sm"
+          className="flex-1 px-4 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl text-[10px] uppercase tracking-widest"
         >
           Задать вопрос AI
         </button>
-        <button className="flex-[1.5] px-4 py-4 bg-cyan-500 text-white font-bold rounded-2xl text-sm shadow-xl shadow-cyan-500/20">
+        <button className="flex-[1.5] px-4 py-4 bg-white text-slate-950 font-black rounded-2xl text-[10px] uppercase tracking-widest shadow-xl shadow-white/10">
           Забронировать место
         </button>
       </div>
