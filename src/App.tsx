@@ -26,7 +26,15 @@ import {
   Target,
   ArrowUpRight,
   ShieldCheck,
-  ZapOff
+  ZapOff,
+  Briefcase,
+  TrendingUp,
+  Globe,
+  ClipboardList,
+  MonitorPlay,
+  MousePointer2,
+  HandCoins,
+  MessageSquare
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { GoogleGenAI } from "@google/genai";
@@ -34,61 +42,66 @@ import { GoogleGenAI } from "@google/genai";
 // --- Constants & Data ---
 
 const KNOWLEDGE_BASE = `
-# КУРС «ВАЙБКОДИНГ: ОТ НУЛЯ ДО СВОИХ ПРОЕКТОВ И ДЕНЕГ»
+# КУРС «ВАЙБКОДИНГ: ТВОРИ С ИИ» — ПОЛНАЯ ПРОГРАММА И ИНФОРМАЦИЯ
 
-Предобучение. МОДУЛЬ 1. Старт и понимание базы
-Урок 1. Вайбкодинг простыми словами: изменения в программировании с ИИ, старт без 3 лет обучения, проекты для новичков.
-Урок 2. Инструменты: Google Gemini, Google AI Studio, Lovable AI, Claude Code. Экономия на подписках.
-Урок 3. Сервер и API: как сайт общается с сервером, запросы/ответы, реальные примеры.
-Результат: понимание логики вайбкодинга.
+ЦЕЛЬ КУРСА:
+Научить создавать сайты, AI-проекты и ботов с помощью ИИ даже без навыков программирования. Показать путь от идеи до монетизации.
 
-МОДУЛЬ 2. Создание сайтов
-Урок 1. Первый сайт: генерация структуры, контент, стили, запуск.
-Урок 2. Дизайн: визуал, адаптация под телефон, анимации.
-Урок 3. Публикация: GitHub, Vercel, Render.
-Результат: первый опубликованный сайт.
+ПРЕДОБУЧЕНИЕ. МОДУЛЬ 0. Старт и понимание базы
+- Что такое вайбкодинг простыми словами.
+- Какие проекты реально собрать новичку.
+- Регистрация и подготовка инструментов: Google Gemini, Google AI Studio, Lovable AI, Claude Code.
+- Что такое сервер и API простыми словами.
+Результат: Полное понимание логики и готовность к практике.
 
-МОДУЛЬ 3. Первый AI-проект
-Урок 1. Google AI Studio: интерфейс, настройки, работа с моделью.
-Урок 2. Связка Google AI Studio: генерация интерфейса, структура, экспорт.
-Урок 3. Публикация: GitHub, Vercel, Render.
-Результат: первый рабочий AI-проект.
+МОДУЛЬ 1. Создание сайтов
+- Генерация структуры через ИИ.
+- Добавление контента и настройка стилей.
+- Адаптация под мобильные устройства.
+- Мини-анимации и визуальные эффекты.
+- Публикация: GitHub, Vercel, Render.
+Результат: Собственный опубликованный адаптивный сайт.
 
-МОДУЛЬ 4. Lovable AI — проекты средней сложности
-Урок 1. Интерфейс Lovable AI: навигация, настройки, логика.
-Урок 2. Интеграция Claude AI и Lovable: подключение модели, запросы.
-Урок 3. Полноценные проекты: структура, данные, авторизация.
-Урок 4. Проект CRM: управление складом, отдел продаж, учет менеджеров.
-Урок 5. Проект мини-платформа: каталог продуктов, личный кабинет, аналог обучающей платформы.
-Результат: серьезные проекты в портфолио.
+МОДУЛЬ 2. Первый AI-проект
+- Инструмент Google AI Studio: настройки и модели.
+- Генерация интерфейса AI-приложения.
+- Подготовка структуры и экспорт кода.
+Результат: Первый рабочий AI-инструмент в портфолио.
 
-МОДУЛЬ 5. Claude code и боты
-Урок 1. Telegram-боты: структура, команды, интеграция ИИ.
-Урок 2. Настройка и публикация: платформы, тестирование.
-Результат: рабочий AI-бот.
+МОДУЛЬ 3. Lovable AI — проекты средней сложности
+- Интерфейс и возможности Lovable AI.
+- Интеграция Claude AI и Lovable.
+- Работа с данными, авторизация пользователей.
+- Проекты: CRM-система, мини-платформа (аналог GetCourse).
+Результат: Сложные веб-приложения с логикой и базами данных.
 
-МОДУЛЬ 6. Монетизация и упаковка
-Блок 1. Стратегия: ниша, позиционирование, оффер.
-Блок 2. Контент: контент-план, лид-магниты, соцсети (Instagram, Telegram, YouTube).
-Блок 3. Инфраструктура: лендинг, воронка, автоматизация, аналитика.
-Блок 4. Деньги: модели монетизации, продажи, масштабирование.
-Блок 5. Claude Code + Claude design: разбор от А до Я, рефакторинг, улучшение интерфейса.
+МОДУЛЬ 4. Claude Code и боты
+- Создание Telegram-ботов с ИИ.
+- Логика команд и бизнес-сценарии.
+- Настройка и публикация ботов.
+Результат: Свой умный Telegram-бот.
 
-Результаты курса:
-- Опубликованный сайт.
-- Первый AI-проект.
-- Рабочий бот.
-- CRM или мини-платформа.
-- Понимание монетизации.
-- Портфолио проектов.
+МОДУЛЬ 5. Монетизация и упаковка
+- Исследование ниши и позиционирование.
+- Формирование оффера и контент-плана (IG, TG, YT).
+- Лид-магниты, воронки продаж и автоматизация.
+- Модели монетизации и масштабирование.
+Результат: Четкий план заработка на своих навыках.
 
-Для кого:
-1. Новичкам: старт с нуля без навыков кода.
-2. Предпринимателям: создание лендингов, CRM и автоматизаций для бизнеса.
-3. Маркетологам и экспертам: упаковка услуг и воронки.
-4. Фрилансерам: новые AI-услуги для клиентов.
+МОДУЛЬ 6. Claude Code + Claude Design
+- Глубокий разбор Claude Code от А до Я.
+- Работа с проектом через AI-команды в терминале.
+- Рефакторинг, улучшение интерфейса и логики.
+Результат: Навык профессиональной доработки приложений.
 
-Что можно создать: лендинги, интернет-магазины, боты, формы, чаты, CRM, онлайн-школы, дашборды, мини-приложения.
+ДЛЯ КОГО КУРС:
+- Новичкам (без опыта в коде).
+- Предпринимателям (для MVP, CRM, лендингов).
+- Маркетологам и экспертам (воронки, упаковка).
+- Фрилансерам (новые дорогие услуги).
+
+ЧТО ВЫ СОЗДАДИТЕ:
+Лендинги, AI-чаты, Telegram-ботов, CRM, онлайн-школы, дашборды, автоматизации бизнес-процессов.
 `;
 
 const SUGGESTED_QUESTIONS = [
@@ -96,8 +109,8 @@ const SUGGESTED_QUESTIONS = [
   "Какие проекты я соберу?",
   "Будет ли Telegram-бот?",
   "Что такое Lovable AI?",
-  "Как проходит обучение?",
-  "Будет ли модуль про деньги?"
+  "Про монетизацию расскажешь?",
+  "Нужно ли уметь кодить?"
 ];
 
 const AUDIENCE = [
@@ -109,12 +122,12 @@ const AUDIENCE = [
   {
     title: "Предпринимателям",
     desc: "Если хотите быстро собирать лендинги, CRM, формы, автоматизации и MVP для бизнеса.",
-    icon: <Rocket className="w-8 h-8" />
+    icon: <Briefcase className="w-8 h-8" />
   },
   {
     title: "Маркетологам",
     desc: "Если нужно упаковывать услуги, запускать воронки, лид-магниты и контент-проекты.",
-    icon: <Share2 className="w-8 h-8" />
+    icon: <TrendingUp className="w-8 h-8" />
   },
   {
     title: "Фрилансерам",
@@ -125,55 +138,75 @@ const AUDIENCE = [
 
 const PROJECTS = [
   {
-    title: "CRM для бизнеса",
-    desc: "Система управления клиентами, статусы, менеджеры и отчетность.",
-    tag: "Сложный проект"
+    title: "Лендинг для бизнеса",
+    desc: "Конверсионная страница с формами, анимациями и аналитикой.",
+    tag: "Модуль 1",
+    icon: <Globe className="w-10 h-10" />
   },
   {
     title: "AI-Ассистент",
-    desc: "Умный помощник для сайта, отвечающий по базе знаний.",
-    tag: "AI Модуль"
+    desc: "Умный чат-бот для сайта, отвечающий на вопросы по вашей базе знаний.",
+    tag: "Модуль 2",
+    icon: <Bot className="w-10 h-10" />
   },
   {
-    title: "Telegram Бот",
-    desc: "Автоматизированный бот с интеграцией нейросетей.",
-    tag: "Автоматизация"
+    title: "Telegram AI-Бот",
+    desc: "Автоматизированный бот с интеграцией нейросетей для бизнеса.",
+    tag: "Модуль 4",
+    icon: <Send className="w-10 h-10" />
+  },
+  {
+    title: "CRM-система",
+    desc: "Управление клиентами, статусы, менеджеры и дашборды продаж.",
+    tag: "Модуль 3",
+    icon: <ClipboardList className="w-10 h-10" />
   },
   {
     title: "Онлайн-школа",
-    desc: "Платформа с личным кабинетом и видео-уроками.",
-    tag: "Продукт"
+    desc: "Платформа с личным кабинетом, курсами и доступом по ролям.",
+    tag: "Модуль 3",
+    icon: <Monitor className="w-10 h-10" />
   },
   {
-    title: "Лендинг услуг",
-    desc: "Конверсионная страница с формами и анимациями.",
-    tag: "Base"
-  },
-  {
-    title: "Дашборд аналитики",
-    desc: "Визуализация данных и графики в реальном времени.",
-    tag: "Frontend"
+    title: "Бизнес-автоматизация",
+    desc: "Связка сервисов, обработка данных и уведомления без участия человека.",
+    tag: "Модуль 4",
+    icon: <Layers className="w-10 h-10" />
   }
 ];
 
-const FAQ = [
-  {
-    q: "Курс подойдет новичку?",
-    a: "Да, обучение начинается с модуля 'Предобучение', где мы разбираем базу: что такое вайбкодинг, как работают API и серверы. Вам не нужно быть программистом."
-  },
-  {
-    q: "Какие инструменты нужны?",
-    a: "Мы работаем с Google Gemini, AI Studio, Lovable AI, Claude Code и Cursor. Эти инструменты позволяют создавать профессиональные продукты быстрее классической разработки."
-  },
-  {
-    q: "Будет ли блок про монетизацию?",
-    a: "Конечно! Шестой модуль полностью посвящен упаковке ваших навыков, поиску ниши, созданию офферов и продажам ваших AI-решений."
-  },
-  {
-    q: "Что такое сервер и API?",
-    a: "На курсе мы объясняем это на пальцах: сервер — это компьютер, где живет логика вашего сайта, а API — это способ общения вашего сайта с другими сервисами (например, с нейросетью)."
-  }
+const CURRICULUM = [
+  { title: "Модуль 0. Предобучение", desc: "Что такое вайбкодинг, регистрация в AI-инструментах, понимание API и серверов.", result: "Фундамент заложен" },
+  { title: "Модуль 1. Сайты", desc: "Генерация структуры через ИИ, контент, адаптация, анимации и запуск на Vercel.", result: "Первый живой сайт" },
+  { title: "Модуль 2. AI-Проект", desc: "Работа с Google AI Studio, создание интерфейса и интеграция LLM-моделей.", result: "Свой AI-софт" },
+  { title: "Модуль 3. Lovable AI", desc: "Сложные приложения, CRM, базы данных и авторизация через Claude + Lovable.", result: "Product-level навыки" },
+  { title: "Модуль 4. Боты", desc: "Telegram-боты с ИИ, сложная логика команд и интеграция внешних сервисов.", result: "Рабочие боты" },
+  { title: "Модуль 5. Монетизация", desc: "Упаковка навыка, поиск ниши, оффер, воронки продаж и контент-стратегия.", result: "План на 1-е деньги" },
+  { title: "Модуль 6. Claude Code", desc: "Разбор Claude Code + Claude Design: рефакторинг и профессиональная поддержка.", result: "Pro уровень" }
 ];
+
+const RESULTS = [
+  { title: "Опубликованный сайт", desc: "Ваш проект доступен по ссылке в интернете.", icon: <Globe className="w-6 h-6" /> },
+  { title: "Первый AI-проект", desc: "Инструмент, который реально 'думает' и помогает.", icon: <BrainCircuit className="w-6 h-6" /> },
+  { title: "Рабочий бот", desc: "Telegram-бот для автоматизации любых задач.", icon: <Send className="w-6 h-6" /> },
+  { title: "CRM-платформа", desc: "Сложное приложение для бизнеса с базой данных.", icon: <Layout className="w-6 h-6" /> },
+  { title: "План монетизации", desc: "Понимание как именно превратить навыки в деньги.", icon: <CreditCard className="w-6 h-6" /> },
+  { title: "Портфолио проектов", desc: "Набор кейсов, которые не стыдно показать клиенту.", icon: <Rocket className="w-6 h-6" /> }
+];
+
+const FAQ_DATA = [
+  { q: "Курс подойдет новичку?", a: "Да, обучение начинается с модуля 'Предобучение', где мы разбираем базу: что такое вайбкодинг, как работают API и серверы. Вам не нужно быть программистом." },
+  { q: "Нужно ли уметь программировать?", a: "Нет. Мы используем ИИ-ассистентов, чтобы они писали код за нас. Вы выступаете в роли архитектора и заказчика." },
+  { q: "Какие инструменты используются?", a: "Google Gemini, AI Studio, Lovable AI, Claude Code и Cursor. Это современный стек вайбкодинга." },
+  { q: "Что я создам во время обучения?", a: "Минимум 5 реальных проектов: лендинг, AI-инструмент, Telegram-бот, CRM-систему и свою воронку продаж." },
+  { q: "Будет ли блок про монетизацию?", a: "Конечно! Пятый модуль полностью посвящен упаковке навыков, поиску ниши и продажам ваших решений." },
+  { q: "Можно ли применять это для бизнеса?", a: "Это идеальный курс для бизнеса. Вы научитесь собирать MVP и автоматизации в 10 раз быстрее и дешевле." },
+  { q: "Как проходит обратная связь?", a: "Вам помогает AI-ассистент, а также предусмотрена поддержка в закрытом сообществе." },
+  { q: "Есть ли ограничения по времени?", a: "Обучение проходит в вашем темпе, доступ к материалам остается у вас." },
+  { q: "Нужный ли мощный компьютер?", a: "Нет, большинство инструментов работают в браузере или через легкие терминальные приложения." },
+  { q: "Что делать, если я не понимаю API и сервер?", a: "В Модуле 0 мы объясняем это на бытовых примерах. Вы поймете механику за 30 минут." }
+];
+
 
 // --- Sub-components ---
 
@@ -183,7 +216,15 @@ const Badge = ({ children, className = "" }: { children: React.ReactNode, classN
   </span>
 );
 
-const Navbar = () => {
+const SectionHeader = ({ badge, title, sub, center = false }: { badge: string, title: string | React.ReactNode, sub?: string, center?: boolean }) => (
+  <div className={`mb-16 ${center ? 'text-center mx-auto max-w-3xl' : ''}`}>
+    <Badge className="mb-6">{badge}</Badge>
+    <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter leading-[0.95] mb-6" dangerouslySetInnerHTML={{ __html: String(title) }} />
+    {sub && <p className="text-xl text-slate-400 font-medium leading-relaxed">{sub}</p>}
+  </div>
+);
+
+const Navbar = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -203,7 +244,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/90 backdrop-blur-xl border-b border-white/10 py-3' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="flex items-center gap-3 overflow-hidden">
+        <a href="#" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
             <BrainCircuit className="text-white w-6 h-6" />
           </div>
@@ -214,10 +255,16 @@ const Navbar = () => {
           {menuItems.map(item => (
             <a key={item.label} href={item.href} className="hover:text-cyan-400 transition-colors">{item.label}</a>
           ))}
+          <button 
+            onClick={onOpenAssistant}
+            className="hover:text-cyan-400 transition-colors flex items-center gap-2"
+          >
+            Задать вопрос ИИ
+          </button>
           <div className="h-4 w-px bg-white/10 mx-2" />
           <button className="text-slate-300 hover:text-white transition-colors">Войти</button>
           <button className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl text-white hover:scale-105 active:scale-95 transition-all shadow-lg shadow-cyan-500/10">
-            Забронировать
+            Забронировать место
           </button>
         </div>
 
@@ -238,9 +285,15 @@ const Navbar = () => {
               {menuItems.map(item => (
                 <a key={item.label} href={item.href} onClick={() => setIsOpen(false)}>{item.label}</a>
               ))}
+              <button 
+                onClick={() => { setIsOpen(false); onOpenAssistant(); }}
+                className="text-left text-cyan-400"
+              >
+                Вопрос ИИ
+              </button>
               <div className="grid grid-cols-2 gap-4 mt-4">
-                <button className="p-4 bg-white/5 border border-white/10 rounded-2xl">Войти</button>
-                <button className="p-4 bg-cyan-500 rounded-2xl">Записаться</button>
+                <button className="p-4 bg-white/5 border border-white/10 rounded-2xl text-base">Войти</button>
+                <button className="p-4 bg-cyan-500 rounded-2xl text-base">Забронировать</button>
               </div>
             </div>
           </motion.div>
@@ -252,58 +305,64 @@ const Navbar = () => {
 
 const MockEditor = () => {
   return (
-    <div className="w-full bg-[#0d1117] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
+    <div className="w-full bg-[#0d1117] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative group">
       <div className="h-10 bg-[#161b22] px-4 flex items-center justify-between border-b border-white/5">
         <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500/50" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          <div className="w-2.5 h-2.5 rounded-full bg-red-500/30 group-hover:bg-red-500/70 transition-colors" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30 group-hover:bg-yellow-500/70 transition-colors" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-500/30 group-hover:bg-green-500/70 transition-colors" />
         </div>
         <div className="px-3 py-1 bg-white/5 rounded text-[10px] text-slate-500 font-mono flex items-center gap-2">
           <Terminal className="w-3 h-3" />
-          vibecoding_project
+          project_generator.ts
         </div>
         <div className="w-8" />
       </div>
-      <div className="p-6 font-mono text-sm leading-relaxed overflow-hidden">
+      <div className="p-6 font-mono text-xs md:text-sm leading-relaxed overflow-hidden">
         <div className="flex gap-4">
-          <span className="text-slate-600 shrink-0">1</span>
-          <span className="text-purple-400">Пользователь:</span> <span className="text-slate-300 italic">"Сделай лендинг с AI-чатом"</span>
+          <span className="text-slate-600 shrink-0">01</span>
+          <span className="text-purple-400">User:</span> <span className="text-slate-300 italic">"Сделай лендинг для онлайн-школы"</span>
         </div>
         <div className="flex gap-4 mt-2">
-          <span className="text-slate-600 shrink-0">2</span>
-          <span className="text-cyan-400">Вайб-AI:</span> <span className="text-slate-400">Проектирую структуру...</span>
+          <span className="text-slate-600 shrink-0">02</span>
+          <span className="text-cyan-400">AI:</span> <span className="text-slate-400">Создаю структуру: Hero, Программа, Кейсы...</span>
         </div>
         <div className="flex gap-4 mt-2 animate-pulse">
-          <span className="text-slate-600 shrink-0">3</span>
-          <span className="text-cyan-400">Вайб-AI:</span> <span className="text-slate-400">✓ Генерация Hero секции</span>
+          <span className="text-slate-600 shrink-0">03</span>
+          <span className="text-cyan-400">AI:</span> <span className="text-slate-400">✓ Генерация UI-компонентов</span>
         </div>
         <div className="flex gap-4 mt-2">
-          <span className="text-slate-600 shrink-0">4</span>
-          <span className="text-cyan-400">Вайб-AI:</span> <span className="text-slate-400">✓ Подключение базы данных</span>
+          <span className="text-slate-600 shrink-0">04</span>
+          <span className="text-cyan-400">AI:</span> <span className="text-slate-400">✓ Настройка формы заявки и базы данных</span>
         </div>
-        <div className="flex gap-4 mt-4 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
-          <span className="text-emerald-400 font-bold shrink-0">DONE</span>
-          <span className="text-emerald-300">Проект опубликован за 1 день. Твой вайб — результат!</span>
-        </div>
-        <div className="mt-6 flex gap-2">
-          <div className="h-2 w-20 bg-slate-800 rounded" />
-          <div className="h-2 w-32 bg-slate-800 rounded" />
-          <div className="h-2 w-12 bg-slate-800 rounded" />
+        <div className="mt-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+           <div className="flex items-center gap-3">
+             <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white">
+               <CheckCircle2 className="w-5 h-5" />
+             </div>
+             <div>
+               <p className="text-emerald-400 font-bold text-xs uppercase">Готово!</p>
+               <p className="text-slate-300 text-xs">Проект опубликован за 1 день. Проверяй результат.</p>
+             </div>
+           </div>
         </div>
       </div>
-      {/* Decorative Blur */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/5 blur-[80px] -z-10" />
+      {/* Decorative Orbs */}
+      <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-cyan-500/20 blur-[60px] rounded-full" />
     </div>
   );
-}
+};
 
-const AIWidget = () => {
+const AIWidget = ({ forceOpen, onClose }: { forceOpen?: boolean, onClose?: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (forceOpen) setIsOpen(true);
+  }, [forceOpen]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -326,8 +385,8 @@ const AIWidget = () => {
         contents: text,
         config: {
           systemInstruction: `Ты — AI-ассистент курса «Вайбкодинг». Работай строго по этой базе знаний: ${KNOWLEDGE_BASE}. 
-          Отвечай кратко, дружелюбно, на русском. Если информации нет в базе — скажи об этом и предложи оставить заявку. 
-          Не выдумывай цену, даты и гарантии дохода.`,
+          Отвечай кратко, дружелюбно, на русском. Если информации нет в базе — скажи честно об этом и предложи оставить заявку. 
+          Не выдумывай цену, даты и гарантии дохода. Мягко веди к покупке курса.`,
          }
       });
       setMessages(prev => [...prev, { role: "bot", text: response.text }]);
@@ -338,6 +397,11 @@ const AIWidget = () => {
     }
   };
 
+  const handleClose = () => {
+    setIsOpen(false);
+    if (onClose) onClose();
+  };
+
   return (
     <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4">
       <AnimatePresence>
@@ -346,40 +410,44 @@ const AIWidget = () => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-[90vw] sm:w-[420px] h-[600px] bg-slate-900 border border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl"
+            className="w-[100vw] h-[100dvh] sm:w-[420px] sm:h-[620px] bottom-[-24px] right-[-24px] sm:static bg-slate-900 border-x border-t sm:border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl"
           >
             {/* Header */}
-            <div className="p-6 bg-slate-800/50 border-b border-white/5 flex items-center justify-between">
+            <div className="p-6 bg-slate-800/80 border-b border-white/5 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-cyan-500 rounded-2xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
                   <Bot className="text-white w-6 h-6" />
                 </div>
                 <div>
                   <h4 className="text-white font-bold tracking-tight">Вайб-Ассистент</h4>
-                  <p className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest">Онлайн</p>
+                  <p className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />
+                    Онлайн • Ответ по программе
+                  </p>
                 </div>
               </div>
               <button 
-                onClick={() => setIsOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors text-slate-400"
+                onClick={handleClose}
+                className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 transition-colors text-slate-400"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               </button>
             </div>
 
             {/* Chat Body */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-hide">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-5 scrollbar-hide bg-slate-950/20">
               {messages.length === 0 && (
                 <div className="space-y-6">
-                  <div className="p-4 bg-white/5 rounded-2xl text-slate-300 text-sm leading-relaxed">
-                    Привет! Я AI-ассистент курса «Вайбкодинг». Могу рассказать про программу, проекты и кому это подходит. С чего начнем?
+                  <div className="p-5 bg-white/5 border border-white/5 rounded-2xl text-slate-300 text-sm leading-relaxed">
+                    Привет! 👋 Я AI-ассистент курса <span className="text-cyan-400 font-bold">«Вайбкодинг»</span>. 
+                    Знаю всё о модулях, проектах и инструментах. Помогу понять, подходит ли вам курс. С чего начнем?
                   </div>
                   <div className="grid grid-cols-1 gap-2">
                     {SUGGESTED_QUESTIONS.map(q => (
                       <button 
                         key={q}
                         onClick={() => handleSend(q)}
-                        className="text-left p-3 rounded-xl bg-slate-800 border border-white/5 text-xs text-slate-400 hover:border-cyan-400/30 hover:text-white transition-all"
+                        className="text-left p-4 rounded-2xl bg-slate-800/50 border border-white/5 text-xs text-slate-400 hover:border-cyan-400/30 hover:text-white hover:bg-slate-800 transition-all font-medium"
                       >
                         {q}
                       </button>
@@ -390,7 +458,7 @@ const AIWidget = () => {
 
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm ${m.role === 'user' ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-900/20' : 'bg-slate-800 text-slate-200 border border-white/5'}`}>
+                  <div className={`max-w-[90%] p-4 rounded-2xl text-sm ${m.role === 'user' ? 'bg-cyan-600/90 text-white shadow-xl shadow-cyan-900/10' : 'bg-slate-800/80 text-slate-200 border border-white/10'}`}>
                     {m.text}
                   </div>
                 </div>
@@ -398,7 +466,7 @@ const AIWidget = () => {
               
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-slate-800 p-4 rounded-2xl flex gap-1.5">
+                  <div className="bg-slate-800/50 p-4 rounded-2xl flex gap-1.5 border border-white/5">
                     <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                     <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                     <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -408,121 +476,127 @@ const AIWidget = () => {
             </div>
 
             {/* Input */}
-            <div className="p-4 bg-slate-950/50 border-t border-white/5">
+            <div className="p-6 bg-slate-900 border-t border-white/5">
               <form 
                 onSubmit={(e) => { e.preventDefault(); handleSend(input); }}
-                className="flex gap-2"
+                className="flex gap-3"
               >
                 <input 
                   type="text" 
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Задать вопрос ИИ..."
-                  className="flex-1 bg-slate-800 border-none rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:ring-1 focus:ring-cyan-500/50"
+                  className="flex-1 bg-slate-800/50 border border-white/5 rounded-2xl px-5 py-4 text-sm text-white placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-500/30 outline-none transition-all"
                   disabled={isLoading}
                 />
                 <button 
                   type="submit"
                   disabled={isLoading}
-                  className="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center text-white disabled:opacity-50"
+                  className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center text-white disabled:opacity-50 hover:shadow-lg hover:shadow-cyan-500/20 active:scale-95 transition-all"
                 >
-                  <Send className="w-5 h-5" />
+                  <Send className="w-6 h-6" />
                 </button>
               </form>
+              <p className="text-[10px] text-center text-slate-600 mt-4 font-bold uppercase tracking-widest">
+                Ассистент отвечает по программе курса
+              </p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <motion.button 
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="group h-14 pl-5 pr-6 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center gap-3 shadow-2xl shadow-cyan-500/40 relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-        <MessageCircle className="text-white w-6 h-6" />
-        <span className="text-white font-bold text-sm hidden sm:block">Спросить AI</span>
-        {isOpen && <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-slate-950" />}
-      </motion.button>
+      {!isOpen && (
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsOpen(true)}
+          className="group h-16 pl-6 pr-8 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center gap-4 shadow-2xl shadow-cyan-500/40 relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="relative">
+            <MessageCircle className="text-white w-7 h-7" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-slate-950 animate-pulse" />
+          </div>
+          <span className="text-white font-bold text-base hidden sm:block">Спросить ИИ</span>
+        </motion.button>
+      )}
     </div>
   );
 };
 
 // --- Main Page Sections ---
 
-const Hero = () => {
+const Hero = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-44 md:pb-40 overflow-hidden bg-slate-950">
-      {/* Background Orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden">
-        <div className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-cyan-500/20 rounded-full blur-[140px]" />
-        <div className="absolute top-[40%] -right-[10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[160px]" />
+    <section className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none -z-10">
+        <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-purple-600/10 rounded-full blur-[140px]" />
+        <div className="absolute top-[20%] right-[30%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <Badge>AI-курс для тех, кто не хочет годами учить код</Badge>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8">
-            Твори с ИИ — <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-              без границ
-            </span>
-          </h1>
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Badge>AI-курс для тех, кто хочет создавать сайты и ботов без кода</Badge>
+            
+            <h1 className="text-5xl md:text-7xl xl:text-8xl font-black text-white leading-[0.95] tracking-tighter mb-8">
+              Научись создавать <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
+                AI-продукты
+              </span>{' '}
+              — даже если ты не программист
+            </h1>
 
-          <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium mb-12 max-w-xl">
-            Пошаговый путь от первого сайта до CRM, ботов и первых денег на ваших цифровых продуктах.
-          </p>
+            <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-semibold mb-12 max-w-xl">
+              Пошаговый курс по вайбкодингу: от первого сайта и Telegram-бота до CRM, автоматизаций и первых денег на цифровых продуктах.
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-5">
-            <button className="px-10 py-5 bg-white text-slate-950 font-black text-xl rounded-2xl shadow-xl shadow-white/5 active:scale-95 transition-all overflow-hidden relative group">
-              <span className="relative z-10 flex items-center gap-3">
-                Забронировать
+            <div className="flex flex-col sm:flex-row gap-5 items-center">
+              <button className="w-full sm:w-auto px-10 py-5 bg-white text-slate-950 font-black text-xl rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-white/10 group flex items-center justify-center gap-3">
+                Забронировать место
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </button>
-            <button className="px-10 py-5 border-2 border-white/10 text-white font-bold text-lg rounded-2xl hover:bg-white/5 transition-all">
-              Посмотреть программу
-            </button>
-          </div>
-          
-          <div className="mt-8 flex items-center gap-6">
-            <div className="flex -space-x-3">
-              {[1,2,3,4].map(i => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-slate-950 bg-slate-800 flex items-center justify-center overflow-hidden">
-                  <img src={`https://picsum.photos/seed/${i + 40}/80/80`} alt="user" className="w-full h-full object-cover" />
-                </div>
-              ))}
+              </button>
+              <button className="w-full sm:w-auto px-10 py-5 border-2 border-white/10 text-white font-bold text-lg rounded-2xl hover:bg-white/5 transition-all">
+                Посмотреть программу
+              </button>
             </div>
-            <div className="text-sm text-slate-500 font-medium">
-              <span className="text-cyan-400 font-bold">150+</span> участников уже в потоке
-            </div>
-          </div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative lg:scale-110 xl:scale-125"
-        >
-          <MockEditor />
-          {/* Floating elements */}
-          <div className="absolute -top-10 -right-10 p-5 bg-slate-900 border border-white/10 rounded-2xl shadow-2xl animate-bounce-slow">
-            <Bot className="text-cyan-400 w-8 h-8" />
-          </div>
-          <div className="absolute -bottom-6 -left-6 p-4 bg-slate-900 border border-white/10 rounded-2xl shadow-2xl">
-             <div className="flex items-center gap-2">
-               <div className="w-3 h-3 bg-emerald-500 rounded-full" />
-               <span className="text-[10px] font-bold text-slate-400 uppercase">Live Preview</span>
-             </div>
-          </div>
-        </motion.div>
+            <button 
+              onClick={onOpenAssistant}
+              className="mt-6 flex items-center gap-2 text-cyan-400 font-bold text-sm hover:text-cyan-300 transition-colors group"
+            >
+              <Sparkles className="w-4 h-4" />
+              Задать вопрос ИИ-ассистенту
+            </button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative lg:pl-10"
+          >
+            <MockEditor />
+            {/* Trust labels */}
+            <div className="absolute -top-12 -right-8 p-6 bg-slate-900/90 border border-white/10 rounded-3xl shadow-2xl backdrop-blur-xl animate-bounce-slow">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-cyan-400 rounded-2xl flex items-center justify-center">
+                  <Bot className="text-slate-950 w-7 h-7" />
+                </div>
+                <div>
+                  <p className="text-xs font-black text-slate-500 uppercase tracking-widest">Проекты</p>
+                  <p className="text-xl font-black text-white">9+ в портфолио</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -530,27 +604,31 @@ const Hero = () => {
 
 const AudienceSection = () => {
   return (
-    <section id="audience" className="py-32 bg-slate-900 overflow-hidden">
+    <section id="audience" className="py-24 bg-slate-950">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <Badge className="mb-4">Для кого это?</Badge>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-6">
-            Курс для создателей <br /> <span className="text-slate-500">нового поколения</span>
-          </h2>
-        </div>
+        <SectionHeader 
+          badge="Для кого курс"
+          title="Кому подойдет вайбкодинг?"
+          sub="Технология, которая уравнивает шансы творцов и технарей"
+          center
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {AUDIENCE.map((item, i) => (
-            <motion.div 
-              key={item.title}
+          {AUDIENCE.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
               whileHover={{ y: -10 }}
-              className="p-8 rounded-[32px] bg-slate-950 border border-white/5 hover:border-cyan-500/40 transition-all group"
+              className="p-8 bg-slate-900/50 border border-white/5 rounded-3xl hover:border-cyan-500/30 transition-all group"
             >
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-cyan-400 mb-8 group-hover:scale-110 transition-transform">
-                {item.icon}
+              <div className="w-14 h-14 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg group-hover:shadow-cyan-500/20">
+                <item.icon className="w-7 h-7 text-cyan-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 italic uppercase tracking-tighter">{item.title}</h3>
-              <p className="text-slate-400 leading-relaxed font-medium">{item.desc}</p>
+              <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{item.title}</h3>
+              <p className="text-slate-400 leading-relaxed text-sm font-medium">{item.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -559,9 +637,108 @@ const AudienceSection = () => {
   );
 }
 
+const TrustMiniSection = () => {
+  return (
+    <section className="py-16 border-y border-white/5 bg-slate-900/20">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col gap-6">
+            <h2 className="text-3xl font-black text-white tracking-tight">
+              Тебе <span className="text-red-400">НЕ</span> нужно:
+            </h2>
+            <div className="space-y-4">
+              {[
+                { icon: ZapOff, text: "Учить синтаксис языков программирования месяцами" },
+                { icon: ZapOff, text: "Разбираться в сложных алгоритмах и структурах данных" },
+                { icon: ZapOff, text: "Иметь техническое образование или опыт в IT" }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-4 text-slate-400">
+                  <div className="w-10 h-10 bg-red-500/10 rounded-xl flex items-center justify-center shrink-0">
+                    <item.icon className="w-5 h-5 text-red-500" />
+                  </div>
+                  <span className="font-medium">{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-6">
+            <h2 className="text-3xl font-black text-white tracking-tight">
+              Тебе <span className="text-cyan-400">НУЖНО</span>:
+            </h2>
+            <div className="space-y-4">
+              {[
+                { icon: ShieldCheck, text: "Уметь четко формулировать свои мысли на русском языке" },
+                { icon: ShieldCheck, text: "Иметь компьютер, интернет и жгучее желание создавать" },
+                { icon: ShieldCheck, text: "Понимать логику продукта и потребности людей" }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-4 text-slate-400">
+                  <div className="w-10 h-10 bg-cyan-500/10 rounded-xl flex items-center justify-center shrink-0">
+                    <item.icon className="w-5 h-5 text-cyan-500" />
+                  </div>
+                  <span className="font-medium">{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const LearningFlowSection = () => {
+  const steps = [
+    { title: "Смотришь урок", desc: "Короткие, емкие видео по 15-20 минут без воды.", icon: MonitorPlay },
+    { title: "Повторяешь за ИИ", desc: "Используешь наши промпты для генерации кода.", icon: Cpu },
+    { title: "Правишь «руками»", desc: "Учимся делать точечные правки через AI-чат.", icon: MousePointer2 },
+    { title: "Запускаешь проект", desc: "Публикуешь сайт или бота в сеть за пару кликов.", icon: Rocket },
+    { title: "Получаешь результат", desc: "Используешь проект для себя или продаешь клиенту.", icon: HandCoins },
+  ];
+
+  return (
+    <section className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-6">
+        <SectionHeader 
+          badge="Процесс"
+          title="Как проходит обучение?"
+          sub="От идеи до рабочего продукта всего за несколько шагов"
+          center
+        />
+
+        <div className="relative">
+          {/* Connecting Line (Desktop) */}
+          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-y-1/2" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative z-10">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center text-center group"
+              >
+                <div className="w-20 h-20 bg-slate-900 border-4 border-slate-950 rounded-full flex items-center justify-center mb-8 relative group-hover:border-cyan-500 transition-all shadow-xl group-hover:shadow-cyan-500/20">
+                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-cyan-400 text-slate-950 font-black rounded-full flex items-center justify-center text-sm">
+                     {i + 1}
+                   </div>
+                   <step.icon className="w-8 h-8 text-white group-hover:text-cyan-400 transition-colors" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">{step.title}</h3>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-32 bg-slate-950 border-y border-white/5 relative">
+    <section id="projects" className="py-24 bg-slate-950 border-y border-white/5 relative">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
           <div className="max-w-2xl">
@@ -570,26 +747,47 @@ const ProjectsSection = () => {
               Проекты, которые ты <span className="text-cyan-400">соберешь за курс</span>
             </h2>
           </div>
-          <div className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em] italic">
+          <div className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">
             9+ полноценных кейсов
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS.map((p, i) => (
-            <div key={p.title} className="group relative p-8 bg-slate-900 rounded-[40px] border border-white/5 overflow-hidden">
-               <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-100 transition-opacity">
-                 <Layout className="w-12 h-12 text-cyan-400" />
-               </div>
-               <span className="text-[10px] font-black uppercase text-cyan-400 tracking-widest">{p.tag}</span>
-               <h3 className="text-2xl font-bold text-white mt-4 mb-3">{p.title}</h3>
-               <p className="text-slate-400 text-sm leading-relaxed">{p.desc}</p>
-               <div className="mt-8 pt-6 border-t border-white/5">
-                 <button className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest hover:text-cyan-400 transition-colors">
-                   Подробнее <ArrowUpRight className="w-4 h-4" />
-                 </button>
-               </div>
-            </div>
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative p-8 bg-slate-900 rounded-[40px] border border-white/5 overflow-hidden flex flex-col h-full"
+            >
+              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                <p.icon className="w-24 h-24 text-cyan-400" />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold text-slate-400 uppercase tracking-widest">{p.tag}</span>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">{p.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed font-medium mb-8">{p.desc}</p>
+              </div>
+
+              <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-lg bg-cyan-400/20 flex items-center justify-center">
+                    <Code2 className="w-4 h-4 text-cyan-400" />
+                  </div>
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <Bot className="w-4 h-4 text-purple-400" />
+                  </div>
+                </div>
+                <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                  Ready to deploy
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -598,38 +796,151 @@ const ProjectsSection = () => {
 }
 
 const CurriculumSection = () => {
-  const modules = [
-    { title: "Предобучение", desc: "Старт, философия вайбкодинга, настройка всех инструментов и понимание API.", result: "Готовность к разработке." },
-    { title: "Создание сайтов", desc: "Генерация структуры через ИИ, адаптив, анимации и публикация в сети.", result: "Твой первый живой сайт." },
-    { title: "AI-проекты", desc: "Работа с Google AI Studio, интеграция нейронки в интерфейс и экспорт.", result: "Собственный AI инструмент." },
-    { title: "Lovable & CRM", desc: "Создание сложных систем, работа с данными, CRM для бизнеса, базы данных.", result: "Архитектура продукта." },
-    { title: "Claude Code & Боты", desc: "Сверхмощный кодинг черех терминал, Telegram-боты и автоматизации.", result: "AI-агенты в деле." },
-    { title: "Монетизация", desc: "Упаковка, оффер, контент-план и продажи своих решений.", result: "Первый доход." }
-  ];
+  const [expandedModule, setExpandedModule] = useState<number | null>(0);
 
   return (
-    <section id="curriculum" className="py-32 bg-slate-900">
+    <section id="curriculum" className="py-24 bg-slate-950">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <Badge>Roadmap</Badge>
-          <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter">План твоего <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">апгрейда</span></h2>
-        </div>
+        <SectionHeader 
+          badge="Программа"
+          title="Пошаговый план <br/> твоего апгрейда"
+          sub="6 модулей: от настройки софта до запуска своего бизнеса"
+        />
 
-        <div className="max-w-4xl mx-auto space-y-6">
-          {modules.map((m, i) => (
-            <div key={m.title} className="p-8 bg-slate-950 rounded-[32px] border border-white/5 flex flex-col md:flex-row gap-8 items-start md:items-center">
-              <div className="w-16 h-16 rounded-2xl bg-cyan-400/10 flex items-center justify-center text-3xl font-black text-cyan-400 shrink-0">
-                {i + 1}
-              </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white mb-2">{m.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{m.desc}</p>
-              </div>
-              <div className="px-5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
-                {m.result}
-              </div>
-            </div>
+        <div className="max-w-4xl space-y-4">
+          {CURRICULUM.map((m, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className={`border rounded-3xl transition-all duration-500 overflow-hidden ${expandedModule === i ? 'bg-slate-900 border-cyan-500/30' : 'bg-slate-900/50 border-white/5'}`}
+            >
+              <button 
+                onClick={() => setExpandedModule(expandedModule === i ? null : i)}
+                className="w-full p-8 flex items-center justify-between group"
+              >
+                <div className="flex items-center gap-6">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-xl transition-colors ${expandedModule === i ? 'bg-cyan-400 text-slate-950' : 'bg-white/5 text-slate-500 group-hover:text-white'}`}>
+                    0{i}
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-xl font-bold text-white tracking-tight">{m.title}</h3>
+                    <p className="text-cyan-400 text-xs font-black uppercase tracking-widest">{m.result}</p>
+                  </div>
+                </div>
+                <div className={`w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition-transform ${expandedModule === i ? 'rotate-180 bg-white/5' : ''}`}>
+                  <ChevronDown className="w-5 h-5 text-slate-400" />
+                </div>
+              </button>
+
+              <AnimatePresence>
+                {expandedModule === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div className="px-8 pb-8 pt-2">
+                       <p className="text-slate-400 font-medium leading-relaxed mb-8 border-l-2 border-cyan-500/30 pl-6">
+                         {m.desc}
+                       </p>
+                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                         <div className="p-4 bg-slate-950/50 rounded-2xl border border-white/5">
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Практическое задание</p>
+                            <p className="text-sm font-bold text-white">Создание структуры и базового кода проекта через AI</p>
+                         </div>
+                         <div className="p-4 bg-slate-950/50 rounded-2xl border border-white/5">
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Бонус модуля</p>
+                            <p className="text-sm font-bold text-cyan-400">Набор готовых AI-промптов для быстрой генерации</p>
+                         </div>
+                       </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const ResultsSection = () => {
+  return (
+    <section id="results" className="py-24 bg-slate-950">
+      <div className="container mx-auto px-6">
+        <SectionHeader 
+          badge="Результаты"
+          title="Что ты получишь <br/> после курса?"
+          sub="Твердые навыки и готовые инструменты для работы"
+          center
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {RESULTS.map((r, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="p-8 bg-slate-900/50 border border-white/5 rounded-3xl hover:border-purple-500/30 transition-all group"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg group-hover:shadow-purple-500/20">
+                <r.icon className="w-7 h-7 text-purple-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{r.title}</h3>
+              <p className="text-slate-400 leading-relaxed text-sm font-medium">{r.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const AIAssistantSection = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
+  return (
+    <section className="py-24 bg-slate-900 overflow-hidden relative">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-30">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.1)_0%,transparent_70%)]" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-4xl mx-auto p-12 bg-slate-950 border border-white/5 rounded-[48px] text-center shadow-2xl">
+          <Badge className="mb-6">AI-помощник</Badge>
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">
+            Остались вопросы <br /> по программе?
+          </h2>
+          <p className="text-xl text-slate-400 mb-10 font-medium">
+            Наш ИИ-ассистент знает всё о курсе: от стоимости до деталей каждого модуля. Спроси его прямо сейчас!
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-left">
+            {SUGGESTED_QUESTIONS.slice(0, 4).map((q, i) => (
+              <button 
+                key={i}
+                onClick={onOpenAssistant}
+                className="p-4 bg-slate-900 border border-white/5 rounded-2xl text-slate-400 text-sm font-bold hover:border-cyan-500/50 hover:text-white transition-all flex items-center gap-3 group"
+              >
+                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-cyan-500/10">
+                  <MessageSquare className="w-4 h-4 text-cyan-400" />
+                </div>
+                {q}
+              </button>
+            ))}
+          </div>
+
+          <button 
+            onClick={onOpenAssistant}
+            className="px-12 py-6 bg-cyan-400 text-slate-950 font-black text-xl rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-cyan-400/20"
+          >
+            Задать свой вопрос
+          </button>
         </div>
       </div>
     </section>
@@ -640,31 +951,38 @@ const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-32 bg-slate-950">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <div className="text-center mb-20">
-          <Badge>FAQ</Badge>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">Остались вопросы?</h2>
-        </div>
+    <section id="faq" className="py-24 bg-slate-950">
+      <div className="container mx-auto px-6">
+        <SectionHeader 
+          badge="FAQ"
+          title="Часто задаваемые <br/> вопросы"
+          center
+        />
 
-        <div className="space-y-4">
-          {FAQ.map((item, i) => (
-            <div key={i} className="rounded-3xl border border-white/5 transition-all overflow-hidden bg-white/[0.02]">
+        <div className="max-w-3xl mx-auto space-y-4">
+          {FAQ_DATA.map((item, i) => (
+            <div 
+              key={i} 
+              className={`border rounded-2xl transition-all duration-300 ${openIndex === i ? 'bg-white/5 border-white/20' : 'bg-transparent border-white/5'}`}
+            >
               <button 
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full p-8 flex items-center justify-between text-left"
+                className="w-full p-6 flex items-center justify-between group"
               >
-                <span className="text-xl font-bold text-white">{item.q}</span>
-                <ChevronDown className={`w-6 h-6 text-slate-500 transition-transform ${openIndex === i ? 'rotate-180' : ''}`} />
+                <span className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors text-left">{item.q}</span>
+                <div className={`shrink-0 ml-4 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-transform ${openIndex === i ? 'rotate-180' : ''}`}>
+                  <ChevronDown className="w-5 h-5 text-slate-400" />
+                </div>
               </button>
               <AnimatePresence>
                 {openIndex === i && (
-                  <motion.div 
+                  <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
                   >
-                    <div className="p-8 pt-0 text-slate-400 text-lg leading-relaxed">
+                    <div className="px-6 pb-6 pt-2 text-slate-400 font-medium leading-relaxed">
                       {item.a}
                     </div>
                   </motion.div>
@@ -678,49 +996,84 @@ const FAQSection = () => {
   );
 }
 
-const Footer = () => {
+const FinalCTASection = ({ onOpenAssistant }: { onOpenAssistant: () => void }) => {
   return (
-    <footer className="bg-slate-950 py-20 border-t border-white/10 relative overflow-hidden">
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600" />
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-16 mb-20 text-center md:text-left">
-          <div className="max-w-sm">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
-              <BrainCircuit className="text-cyan-400 w-10 h-10" />
-              <span className="text-3xl font-black text-white tracking-tight uppercase italic">Вайбкодинг</span>
-            </div>
-            <p className="text-slate-500 font-medium">
-              Научись создавать сайты, AI-проекты и ботов с помощью ИИ — даже если ты не программист.
-            </p>
-          </div>
+    <section className="py-24 bg-slate-950 relative overflow-hidden">
+      <div className="container mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto">
+          <h2 className="text-5xl md:text-8xl font-black text-white mb-10 tracking-tighter italic uppercase leading-[0.8] scale-y-110">
+            Твое будущее <br /> <span className="text-cyan-400">начинается здесь</span>
+          </h2>
+          <p className="text-xl md:text-2xl text-slate-400 mb-12 font-bold max-w-2xl mx-auto italic">
+            Старт следующего потока: <span className="text-white">Через 3 дня</span>. Набор ограничен для качества обучения.
+          </p>
           
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-20">
-            <div>
-              <h5 className="text-white font-black uppercase text-xs tracking-widest mb-6">Продукт</h5>
-              <ul className="space-y-4 text-slate-500 font-bold text-sm uppercase italic">
-                <li><a href="#audience" className="hover:text-cyan-400 transition-colors">Для кого</a></li>
-                <li><a href="#projects" className="hover:text-cyan-400 transition-colors">Проекты</a></li>
-                <li><a href="#curriculum" className="hover:text-cyan-400 transition-colors">Программа</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="text-white font-black uppercase text-xs tracking-widest mb-6">Сообщество</h5>
-              <div className="flex gap-4 items-center justify-center lg:justify-start">
-                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-cyan-400 transition-all hover:bg-white/10"><Send className="w-5 h-5"/></a>
-                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-cyan-400 transition-all hover:bg-white/10"><Youtube className="w-5 h-5"/></a>
-                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-cyan-400 transition-all hover:bg-white/10"><Instagram className="w-5 h-5"/></a>
-              </div>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button className="w-full sm:w-auto px-12 py-6 bg-white text-slate-950 font-black text-2xl rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-white/10">
+              Забронировать место
+            </button>
+            <button 
+              onClick={onOpenAssistant}
+              className="w-full sm:w-auto px-12 py-6 bg-slate-900 text-white border border-white/10 font-bold text-xl rounded-2xl hover:bg-slate-800 transition-all"
+            >
+              Спросить AI
+            </button>
           </div>
         </div>
-        
-        <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 gap-6">
-          <div className="text-slate-600 font-bold text-[10px] uppercase tracking-[0.2em]">
-            © 2026 Вайбкодинг Academy. Built with AI.
+      </div>
+    </section>
+  );
+}
+
+const Footer = () => {
+  return (
+    <footer className="bg-slate-950 pt-24 pb-12 border-t border-white/5">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-16 mb-20">
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-3 mb-8">
+              <BrainCircuit className="w-10 h-10 text-cyan-400" />
+              <span className="text-3xl font-black text-white uppercase italic tracking-tight">Вайбкодинг</span>
+            </div>
+            <p className="text-slate-400 text-lg font-medium leading-relaxed max-w-md mb-8">
+              Первая в СНГ академия вайбкодинга. Обучаем создателей нового поколения, которые используют ИИ как суперсилу.
+            </p>
+            <div className="flex gap-4">
+              {[Send, Youtube, Instagram].map((Icon, i) => (
+                <a key={i} href="#" className="w-12 h-12 bg-slate-900 border border-white/10 rounded-xl flex items-center justify-center text-white hover:border-cyan-400 hover:text-cyan-400 transition-all">
+                  <Icon className="w-6 h-6" />
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="flex gap-8 text-slate-600 font-bold text-[10px] uppercase tracking-widest">
-            <a href="#" className="hover:text-slate-400">Политика</a>
-            <a href="#" className="hover:text-slate-400">Оферта</a>
+          
+          <div>
+            <h4 className="text-white font-black uppercase text-xs tracking-widest mb-8">Навигация</h4>
+            <ul className="space-y-4">
+              {['Программа', 'Результаты', 'Для кого', 'FAQ'].map(item => (
+                <li key={item}>
+                  <a href={`#${item.toLowerCase()}`} className="text-slate-500 font-bold text-sm uppercase italic hover:text-cyan-400 transition-colors">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-black uppercase text-xs tracking-widest mb-8">Курс</h4>
+            <p className="text-slate-500 font-bold text-sm italic mb-4">Старт потока: 3 дня</p>
+            <button className="w-full py-4 bg-white/5 border border-white/10 rounded-xl text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+              Забронировать
+            </button>
+          </div>
+        </div>
+
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black text-slate-600 uppercase tracking-widest">
+          <p>© 2026 Вайбкодинг. Built with AI in record time.</p>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-slate-400 transition-colors">Политика конфиденциальности</a>
+            <a href="#" className="hover:text-slate-400 transition-colors">Публичная оферта</a>
           </div>
         </div>
       </div>
@@ -731,120 +1084,37 @@ const Footer = () => {
 // --- Main App ---
 
 export default function App() {
+  const [forceOpenAssistant, setForceOpenAssistant] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleOpenAssistant = () => {
+    setForceOpenAssistant(true);
+    // Reset after a short delay
+    setTimeout(() => setForceOpenAssistant(false), 500);
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-400/30 selection:text-white">
-      <Navbar />
-      <Hero />
+      <Navbar onOpenAssistant={handleOpenAssistant} />
+      <Hero onOpenAssistant={handleOpenAssistant} />
       
-      {/* Trust Bar */}
-      <div className="py-10 bg-slate-900 border-y border-white/5 overflow-hidden whitespace-nowrap">
-        <div className="flex animate-marquee items-center gap-20">
-          {[1,2,3,4,5,6,7].map(i => (
-            <div key={i} className="flex items-center gap-4 text-slate-500 font-black uppercase text-xl italic tracking-tighter opacity-50 shrink-0">
-              <Cpu className="w-6 h-6" /> Artificial Intelligence
-              <Rocket className="w-6 h-6" /> Zero to MVP
-              <Target className="w-6 h-6" /> Digital Product
-            </div>
-          ))}
-        </div>
-      </div>
-
+      <TrustMiniSection />
       <AudienceSection />
+      <LearningFlowSection />
       <ProjectsSection />
-
-      {/* Trust Mini Section: No professional JS needed */}
-      <section className="py-24 relative overflow-hidden bg-slate-950">
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto p-12 bg-white/[0.02] border border-white/10 rounded-[60px] grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-black text-white tracking-tighter mb-8 leading-none">
-                Старт не требует <br /> специальных <span className="text-cyan-400 text-5xl">знаний</span>
-              </h2>
-              <div className="space-y-4">
-                {[
-                  "Знать JS на профи уровне",
-                  "Иметь опыт в IT",
-                  "Понимать бэкенд",
-                  "Тратить годы на учебу"
-                ].map(txt => (
-                  <div key={txt} className="flex items-center gap-3 text-slate-500 font-medium">
-                    <ZapOff className="w-5 h-5 text-red-500/50" />
-                    Не нужно: <span className="text-slate-400">{txt}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="space-y-4">
-               {[
-                 "Желание создавать проекты",
-                 "Базовая грамотность",
-                 "Интерес к AI инструментам",
-                 "Готовность к практике"
-               ].map(txt => (
-                 <div key={txt} className="p-6 bg-slate-900 border border-white/5 rounded-3xl flex items-center gap-4">
-                   <ShieldCheck className="w-6 h-6 text-emerald-400" />
-                   <span className="text-white font-bold">{txt}</span>
-                 </div>
-               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <CurriculumSection />
-
-      {/* AI Assistant Promo Section */}
-      <section className="py-32 bg-slate-950">
-        <div className="container mx-auto px-6 text-center">
-          <div className="max-w-4xl mx-auto inline-block p-1 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-[44px]">
-             <div className="bg-slate-950 rounded-[43px] p-12 md:p-20 relative overflow-hidden">
-                <Bot className="w-20 h-20 text-cyan-400 mx-auto mb-10" />
-                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8">
-                  Не уверен, подойдет ли курс? <br /> <span className="text-cyan-400">Спроси Вайб-Ассистента</span>
-                </h2>
-                <p className="text-xl text-slate-400 mb-12 max-w-xl mx-auto leading-relaxed">
-                  Он знает всю программу до мелочей и поможет разобраться, какой модуль будет для тебя самым полезным.
-                </p>
-                <button 
-                  onClick={() => { (document.querySelector('button[aria-label="Спросить AI"]') as HTMLElement)?.click(); }}
-                  className="px-12 py-5 bg-cyan-500 text-white font-black text-xl rounded-2xl hover:scale-110 active:scale-95 transition-all shadow-xl shadow-cyan-500/20"
-                >
-                  Задать свой вопрос
-                </button>
-             </div>
-          </div>
-        </div>
-      </section>
-
+      <ResultsSection />
+      <AIAssistantSection onOpenAssistant={handleOpenAssistant} />
       <FAQSection />
-
-      {/* Final CTA */}
-      <section className="py-40 bg-slate-950 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-cyan-500/10 blur-[150px] rounded-full -z-10" />
-        <div className="container mx-auto px-6 text-center">
-          <Badge>Tвой ход</Badge>
-          <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-10">Твой путь к <span className="text-cyan-400 underline decoration-cyan-400/30 underline-offset-[10px]">результату</span></h2>
-          <p className="text-2xl text-slate-400 max-w-2xl mx-auto mb-16 font-medium">
-            Твой первый AI-проект начнется уже на первой неделе обучения. Готов поймать вайб?
-          </p>
-          <button className="px-16 py-7 bg-white text-slate-950 font-black text-2xl rounded-3xl hover:shadow-[0_0_50px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 transition-all">
-            Забронировать место
-          </button>
-          <div className="mt-12 flex justify-center items-center gap-10 opacity-30 grayscale contrast-125">
-            <div className="flex items-center gap-2 text-white font-black italic"><Cpu className="w-5 h-5"/> AI Powered</div>
-            <div className="flex items-center gap-2 text-white font-black italic"><Github className="w-5 h-5"/> Dev Ready</div>
-            <div className="flex items-center gap-2 text-white font-black italic"><Terminal className="w-5 h-5"/> Code Free</div>
-          </div>
-        </div>
-      </section>
-
+      <FinalCTASection onOpenAssistant={handleOpenAssistant} />
       <Footer />
-      <AIWidget />
+
+      <AIWidget forceOpen={forceOpenAssistant} onClose={() => setForceOpenAssistant(false)} />
 
       {/* Sticky Bottom Bar for Mobile */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 z-[90] bg-slate-950/80 backdrop-blur-xl border-t border-white/10 flex gap-4">
         <button 
-          onClick={() => { (document.querySelector('button[aria-label="Спросить AI"]') as HTMLElement)?.click(); }}
+          onClick={handleOpenAssistant}
           className="flex-1 px-4 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl text-sm"
         >
           Задать вопрос AI
